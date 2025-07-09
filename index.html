@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TRADE BOSS — Premium Trading Course</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <style>
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(30px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    .animated-text { animation: fadeInUp 1s ease forwards; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+    .lang-switcher {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      z-index: 1000;
+      transition: opacity 0.3s ease;
+    }
+    .lang-switcher.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .lang-switcher button {
+      background: none;
+      border: none;
+      color: #ffd700;
+      font-size: 1.2rem;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+    header, section, footer {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .btn {
+      padding: 12px 28px;
+      background: linear-gradient(to right, #ffd700, #ffcc00);
+      color: #000;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover { background: #fff176; }
+
+    .wallet {
+      background: #222;
+      padding: 10px 16px;
+      margin: 10px auto;
+      display: inline-block;
+      color: #0f0;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    #qrcode { margin-top: 20px; }
+
+    .preview iframe {
+      width: 100%;
+      max-width: 900px;
+      height: 500px;
+      border: 2px solid #ffd700;
+      border-radius: 10px;
+    }
+    @media (max-width: 768px) {
+      header, section, footer { padding: 30px 10px; }
+      .btn { font-size: 0.95rem; padding: 10px 20px; }
+      .preview iframe { height: 400px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div class="lang-switcher" id="langBar">
+    <button onclick="setLang('en')">🇬🇧</button>
+    <button onclick="setLang('cz')">🇨🇿</button>
+    <button onclick="setLang('ru')">🇷🇺</button>
+    <button onclick="setLang('it')">🇮🇹</button>
+    <button onclick="setLang('ua')">🇺🇦</button>
+  </div>
+
+  <header>
+    <h1 id="title" class="animated-text">TRADE BOSS</h1>
+    <p id="subtitle" class="animated-text" style="animation-delay: 0.5s; animation-duration: 1.2s;">The practical trading course for a new generation. No fluff — only results.</p>
+    <a href="https://paypal.me/TKotolup" class="btn animated-text" target="_blank" id="buyBtn" style="animation-delay: 1s; animation-duration: 1.2s;">Buy Now – $19</a>
+  </header>
+
+  <div class="preview" style="text-align:center;">
+    <iframe src="https://tetiana-a.github.io/tradingTK/" title="Course Preview"></iframe>
+  </div>
+
+  <section>
+    <h2 id="who">Who is this course for?</h2>
+    <p id="p1">Beginners who want to avoid losses</p>
+    <p id="p2">People tired of gambling on the market</p>
+    <p id="p3">Anyone who wants structure, rules, and results</p>
+  </section>
+
+  <section>
+    <h2 id="inside">What’s inside?</h2>
+    <p>📘 PDF course (30+ pages)</p>
+    <p>📈 Entry/Exit strategies</p>
+    <p>🛡️ Risk management</p>
+    <p>💬 Telegram support</p>
+  </section>
+
+  <section>
+    <h2>💳 <span id="payment">Payment Methods</span></h2>
+    <p><strong>PayPal:</strong> <a href="https://paypal.me/TKotolup" target="_blank">paypal.me/TKotolup</a></p>
+    <p><strong>Crypto (TRC20 USDT):</strong></p>
+    <div class="wallet">TFA319WbHsYfhYqVa67vXiwboxioBQM82R</div>
+    <button class="btn" onclick="copyWallet()">📋 Copy Wallet Address</button>
+    <div id="qrcode"></div>
+  </section>
+
+  <section>
+    <h2 id="support">Support</h2>
+    <p>💬 Telegram: <a href="https://t.me/Tetiana666666" target="_blank">@Tetiana666666</a></p>
+    <p>📩 Email: kotolup24@gmail.com</p>
+  </section>
+
+  <footer>
+    &copy; 2025 TRADE BOSS. All rights reserved.
+  </footer>
+
+  <script>
+    const translations = {
+      en: { title: "TRADE BOSS", subtitle: "The practical trading course for a new generation. No fluff — only results.", buyBtn: "Buy Now – $19", who: "Who is this course for?", p1: "Beginners who want to avoid losses", p2: "People tired of gambling on the market", p3: "Anyone who wants structure, rules, and results", inside: "What’s inside?", payment: "Payment Methods", support: "Support" },
+      cz: { title: "TRADE BOSS", subtitle: "Praktický kurz obchodování pro novou generaci. Bez zbytečností — jen výsledky.", buyBtn: "Koupit nyní – $19", who: "Pro koho je tento kurz?", p1: "Začátečníci, kteří se chtějí vyhnout ztrátám", p2: "Lidé unavení z hazardu na trhu", p3: "Kdokoli, kdo chce strukturu, pravidla a výsledky", inside: "Co je uvnitř?", payment: "Platební metody", support: "Podpora" },
+      ru: { title: "TRADE BOSS", subtitle: "Практический курс трейдинга для нового поколения. Без воды — только результат.", buyBtn: "Купить сейчас – $19", who: "Для кого этот курс?", p1: "Новички, которые хотят избежать убытков", p2: "Люди, уставшие от азартной игры на рынке", p3: "Те, кто хочет чёткость, правила и результат", inside: "Что внутри?", payment: "Способы оплаты", support: "Поддержка" },
+      it: { title: "TRADE BOSS", subtitle: "Il corso pratico di trading per la nuova generazione. Niente fuffa — solo risultati.", buyBtn: "Acquista ora – $19", who: "Per chi è questo corso?", p1: "Principianti che vogliono evitare perdite", p2: "Persone stanche di scommettere sul mercato", p3: "Chi vuole struttura, regole e risultati", inside: "Cosa c'è dentro?", payment: "Metodi di pagamento", support: "Supporto" },
+      ua: { title: "TRADE BOSS", subtitle: "Практичний курс трейдингу для нового покоління. Жодної води — лише результат.", buyBtn: "Придбати зараз – $19", who: "Для кого цей курс?", p1: "Початківці, які хочуть уникнути втрат", p2: "Люди, які втомились від азарту на ринку", p3: "Ті, хто хоче структуру, правила та результат", inside: "Що всередині?", payment: "Способи оплати", support: "Підтримка" }
+    };
+
+    function setLang(lang) {
+      const t = translations[lang];
+      for (const key in t) {
+        document.getElementById(key).innerText = t[key];
+      }
+    }
+
+    function copyWallet() {
+      navigator.clipboard.writeText("TFA319WbHsYfhYqVa67vXiwboxioBQM82R");
+      alert("Wallet address copied!");
+    }
+
+    window.onload = function () {
+      QRCode.toCanvas(document.getElementById('qrcode'), "TFA319WbHsYfhYqVa67vXiwboxioBQM82R", function (error) {
+        if (error) console.error(error);
+      });
+
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 40 },
+          color: { value: '#ffd700' },
+          shape: { type: 'circle' },
+          opacity: { value: 0.6 },
+          size: { value: 3 },
+          move: { enable: true, speed: 1 }
+        }
+      });
+    };
+
+    let lastScroll = 0;
+    window.addEventListener("scroll", () => {
+      const langBar = document.getElementById("langBar");
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        langBar.classList.add("hidden");
+      } else {
+        langBar.classList.remove("hidden");
+      }
+      lastScroll = currentScroll;
+    });
+  </script>
+</body>
+</html>
